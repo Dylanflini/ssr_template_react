@@ -2,18 +2,22 @@ import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import path from 'path';
-import App from '../client/components/app'
+import App from './client/components/app'
 
 const app = express();
 
-app.use('/static',express.static(path.join(__dirname, '..','..','dist','static')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     const root = (
         <html>
+            <head>
+                <link rel="stylesheet" href="/static/bundle.css" type="text/css" ></link>
+                <title>SSR React Template</title>
+            </head>
             <body>
                 <div id="root">
-                    <App/>
+                    <App />
                 </div>
                 <script src="/static/bundle.js" ></script>
             </body>
